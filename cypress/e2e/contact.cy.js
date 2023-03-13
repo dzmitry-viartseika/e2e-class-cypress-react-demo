@@ -9,11 +9,11 @@ describe('contact page', () => {
     cy.get('[data-cy="contact-input-message"]').type('Hello everybody');
     cy.get('[data-cy="contact-input-name"]').type('Dzmitry');
     cy.get('[data-cy="contact-input-email"]').type('test@gmail.com');
-    cy.get('[data-cy="contact-btn-submit"]').contains(BUTTON_DEFAULT_TEXT);
-    cy.get('[data-cy="contact-btn-submit"]').should('not.have.attr', 'disabled')
-    cy.get('[data-cy="contact-btn-submit"]').click();
-
-    cy.get('[data-cy="contact-btn-submit"]').contains(BUTTON_LOADING_TEXT);
-    cy.get('[data-cy="contact-btn-submit"]').should('have.attr', 'disabled')
+    cy.get('[data-cy="contact-btn-submit"]').contains(BUTTON_DEFAULT_TEXT).as('submitButton');
+    cy.get('@submitButton').should('not.have.attr', 'disabled')
+    cy.get('[data-cy="contact-btn-submit"]').as('submitButton');
+    cy.get('@submitButton').click();
+    cy.get('@submitButton').contains(BUTTON_LOADING_TEXT);
+    cy.get('@submitButton').should('have.attr', 'disabled')
   })
 })
