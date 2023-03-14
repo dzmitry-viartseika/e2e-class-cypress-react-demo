@@ -40,7 +40,7 @@ describe('contact page', () => {
 
   it('should validate the form input', () => {
     const BUTTON_LOADING_TEXT = 'Sending...';
-    const CLASS_INVALID = 'invalid';
+    const INVALID_CLASS = 'invalid';
 
     cy.get('[data-cy="contact-btn-submit"]').as('submitButton');
     cy.get('[data-cy="contact-input-message"]').as('inputMessage');
@@ -51,26 +51,24 @@ describe('contact page', () => {
       expect(el).to.not.have.attr('disabled');
       expect(el.text()).to.not.eq(BUTTON_LOADING_TEXT)
     })
-    cy.get('@submitButton').click();
+
     cy.get('@inputMessage').focus().blur();
     cy.get('@inputMessage')
         .parent()
-        .then((el) => {
-          expect(el.attr('class')).to.contains(CLASS_INVALID)
-    })
+        .should('have.attr', 'class').and('match', /invalid/)
 
     cy.get('@inputName').focus().blur();
     cy.get('@inputName')
         .parent()
-        .then((el) => {
-          expect(el.attr('class')).to.contains(CLASS_INVALID)
-    })
+        .should('have.attr', 'class').and('match', /invalid/)
 
     cy.get('@inputEmail').focus().blur();
     cy.get('@inputEmail')
         .parent()
-        .then((el) => {
-          expect(el.attr('class')).to.contains(CLASS_INVALID)
-    })
+        .should((el) => {
+          expect(el.attr('class')).contains(INVALID_CLASS)
+        })
+
+    cy.get('@submitButton').click();
   })
 })
