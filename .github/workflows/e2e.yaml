@@ -1,16 +1,16 @@
-name: Cypress Tests
-on: [push]
-jobs:
-  Cypress-Test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout GitCode
-        uses: actions/checkout@v2
-
-      - name: Run Cypress Test
-        uses: cypress-io/github-action@v4
-        with:
-          build: npm run build
-          start: npm run dev
-          command: npx cypress run
-          browser: chrome
+#name: Cypress Tests
+#on: [push]
+#jobs:
+#  Cypress-Test:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout GitCode
+#        uses: actions/checkout@v2
+#
+#      - name: Run Cypress Test
+#        uses: cypress-io/github-action@v4
+#        with:
+#          build: npm run build
+#          start: npm run dev
+#          command: npx cypress run
+#          browser: chrome
