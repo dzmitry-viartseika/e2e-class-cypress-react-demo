@@ -33,7 +33,7 @@ jobs:
           browser: chrome
           build: npm run build
           start: npm run dev
-          wait-on: 'http://localhost:3000'
+          wait-on: 'http://127.0.0.1:5173/'
 
       - name: Publish test results
         uses: actions/upload-artifact@v2
