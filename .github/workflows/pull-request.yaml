@@ -19,9 +19,26 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_JAVASCRIPT_ES: true
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Lint
-        run: npm run lint
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
 
-      - name: Test
-        run: npm run test:unit
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run E2E tests
+        uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
+          start: npm start
+          wait-on: 'http://localhost:3000'
+
+      - name: Publish test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: cypress/results
