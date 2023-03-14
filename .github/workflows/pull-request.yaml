@@ -1,0 +1,42 @@
+name: Pull Request Workflow
+
+on:
+  pull_request:
+
+jobs:
+  pr-checks:
+    name: PR Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: NPM Install
+        run: npm install
+
+      - name: Check Super Linter
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_JAVASCRIPT_ES: true
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Cypress Test
+        uses: cypress-io/github-action@v4
+        with:
+          build: npm run build
+          start: npm run dev
+          command: npx cypress run
+          browser: chrome
+
+      - name: Publish test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: cypress/results
