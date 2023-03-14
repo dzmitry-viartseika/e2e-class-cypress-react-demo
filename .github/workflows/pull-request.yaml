@@ -11,6 +11,11 @@ jobs:
       - name: Check Out
         uses: actions/checkout@v3
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
       - name: NPM Install
         run: npm install
 
@@ -22,19 +27,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-
-      - name: Install dependencies
-        run: npm install
-
       - name: Run E2E tests
         uses: cypress-io/github-action@v2
         with:
           browser: chrome
-          start: npm start
+          start: npm run serve
           wait-on: 'http://localhost:3000'
 
       - name: Publish test results
