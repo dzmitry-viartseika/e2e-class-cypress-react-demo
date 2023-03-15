@@ -69,6 +69,6 @@ describe('contact page', () => {
           expect(el.attr('class')).contains(INVALID_CLASS)
         })
 
-    cy.get('@submitButton').click();
+    cy.submitForm()
   })
 })
