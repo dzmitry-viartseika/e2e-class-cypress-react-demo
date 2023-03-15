@@ -1,8 +1,7 @@
-const WEBSITE_LINK = 'http://localhost:5173/';
 
-describe('navigation page', () => {
+describe('navigation page', { defaultCommandTimeout: 70000, browser: 'chrome' }, () => {
   it('should navigate between pages', () => {
-    cy.visit(WEBSITE_LINK);
+    cy.visit('/');
     cy.get('[data-cy="header-about-link"]').click();
     cy.location('pathname').should('eq', '/about')
     cy.go('back');

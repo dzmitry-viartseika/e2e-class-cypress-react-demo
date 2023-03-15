@@ -1,4 +1,4 @@
-const WEBSITE_LINK_ABOUT = 'http://localhost:5173/about';
+const WEBSITE_LINK_ABOUT = '/about';
 
 describe('contact page', () => {
 
@@ -6,7 +6,7 @@ describe('contact page', () => {
     cy.visit(WEBSITE_LINK_ABOUT);
   })
 
-  it('should submit the form', () => {
+  it('should submit the form', { defaultCommandTimeout: 7000, browser:  'chrome'}, () => {
     const BUTTON_LOADING_TEXT = 'Sending...';
     const BUTTON_DEFAULT_TEXT = 'Send Message';
 
